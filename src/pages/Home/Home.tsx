@@ -20,7 +20,11 @@ import { Message, getMessages } from '../../data/messages';
 
 import './Home.css';
 
-const Home: React.FC = () => {
+interface HomeProps {
+  uid: string
+}
+
+const Home: React.FC<HomeProps> = ({uid}) => {
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -58,9 +62,11 @@ const Home: React.FC = () => {
 
         <IonButton expand="block"><IonIcon icon={ addOutline } />&nbsp;New Note</IonButton>
 
-        <IonList>
-          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
-        </IonList>
+        {uid &&
+          <IonList>
+            {messages.map(m => <MessageListItem key={m.id} message={m}/>)}
+          </IonList>
+        }
       </IonContent>
     </IonPage>
   );
