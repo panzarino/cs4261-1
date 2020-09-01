@@ -18,10 +18,6 @@ const NotesList: React.FC = () => {
   const [user] = useAuthState(firebase.auth());
   const [notes, loading] = useList(db.orderByChild('uid').equalTo(user ? user.uid : ''));
 
-  if (loading) {
-    return <IonLoading isOpen={ loading } />;
-  }
-
   return (
     <IonList>
       {notes && notes.map(note => (
@@ -32,6 +28,14 @@ const NotesList: React.FC = () => {
           </IonLabel>
         </IonItem>
       ))}
+      {!loading && (!notes || notes.length < 1) && (
+        <IonItem >
+          <IonLabel className="ion-text-center">
+            <h2>No Notes</h2>
+          </IonLabel>
+        </IonItem>
+      )}
+      <IonLoading isOpen={ loading } />
     </IonList>
   );
 };
