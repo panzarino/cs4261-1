@@ -25,7 +25,7 @@ import { Message, getMessages } from '../../data/messages';
 import './Home.css';
 
 const Home: React.FC = () => {
-  const [user, loading, error] = useAuthState(firebase.auth());
+  const [user, loading] = useAuthState(firebase.auth());
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonButton expand="block"><IonIcon icon={ addOutline } />&nbsp;New Note</IonButton>
+        <IonButton expand="block" routerLink="/notes/new"><IonIcon icon={ addOutline } />&nbsp;New Note</IonButton>
 
         <IonList>
           {messages.map(m => <MessageListItem key={m.id} message={m}/>)}
