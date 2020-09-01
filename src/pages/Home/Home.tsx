@@ -14,15 +14,18 @@ import {
   useIonViewWillEnter
 } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
-import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import MessageListItem from '../../components/MessageListItem/MessageListItem';
+
+import firebase from '../../lib/firebase';
 
 import { Message, getMessages } from '../../data/messages';
 
 import './Home.css';
 
 const Home: React.FC = () => {
+  const [user, loading, error] = useAuthState(firebase.auth());
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -60,19 +63,11 @@ const Home: React.FC = () => {
 
         <IonButton expand="block"><IonIcon icon={ addOutline } />&nbsp;New Note</IonButton>
 
-        <IfFirebaseAuthed>
-          {() => (
-            <IonList>
-              {messages.map(m => <MessageListItem key={m.id} message={m}/>)}
-            </IonList>
-          )}
-        </IfFirebaseAuthed>
+        <IonList>
+          {messages.map(m => <MessageListItem key={m.id} message={m}/>)}
+        </IonList>
 
-        <IfFirebaseUnAuthed>
-          {() => (
-            <IonLoading isOpen />
-          )}
-        </IfFirebaseUnAuthed>
+        <IonLoading isOpen={ loading } />
       </IonContent>
     </IonPage>
   );
