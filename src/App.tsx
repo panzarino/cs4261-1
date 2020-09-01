@@ -4,7 +4,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import Home from './pages/Home/Home';
-import ViewMessage from './pages/ViewMessage/ViewMessage';
+import ViewNote from './pages/ViewNote/ViewNote';
 import NewNote from './pages/NewNote/NewNote';
 
 import firebase from './lib/firebase';
@@ -38,7 +38,7 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/home" component={Home} exact={true} />
-          <Route path="/message/:id" component={ViewMessage} exact={true} />
+          <Route path="/notes/:id" component={ViewNote} exact={true} />
           <Route path="/notes/new" component={NewNote} exact />
           <Route exact path="/" render={() => <Redirect to="/home" />} />
         </IonRouterOutlet>
