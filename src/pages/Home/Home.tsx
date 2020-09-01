@@ -5,6 +5,7 @@ import {
   IonHeader,
   IonIcon,
   IonList,
+  IonLoading,
   IonPage,
   IonRefresher,
   IonRefresherContent,
@@ -13,6 +14,7 @@ import {
   useIonViewWillEnter
 } from '@ionic/react';
 import { addOutline } from 'ionicons/icons';
+import { IfFirebaseAuthed, IfFirebaseUnAuthed } from '@react-firebase/auth';
 
 import MessageListItem from '../../components/MessageListItem/MessageListItem';
 
@@ -62,11 +64,19 @@ const Home: React.FC<HomeProps> = ({uid}) => {
 
         <IonButton expand="block"><IonIcon icon={ addOutline } />&nbsp;New Note</IonButton>
 
-        {uid &&
-          <IonList>
-            {messages.map(m => <MessageListItem key={m.id} message={m}/>)}
-          </IonList>
-        }
+        <IfFirebaseAuthed>
+          {() => (
+            <IonList>
+              {messages.map(m => <MessageListItem key={m.id} message={m}/>)}
+            </IonList>
+          )}
+        </IfFirebaseAuthed>
+
+        <IfFirebaseUnAuthed>
+          {() => (
+            <IonLoading isOpen />
+          )}
+        </IfFirebaseUnAuthed>
       </IonContent>
     </IonPage>
   );

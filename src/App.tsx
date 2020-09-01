@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonApp, IonRouterOutlet, useIonViewWillEnter } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -39,26 +39,16 @@ const firebaseConfig = {
 };
 
 const App: React.FC = () => {
-  const [uid, setUid] = useState<string>('');
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setUid(user.uid);
-      }
-    });
-  })
-
-  useEffect(() => {
+  useIonViewWillEnter(() => {
     firebase.auth().signInAnonymously();
-  }, [])
+  }, []);
 
   return (
     <IonApp>
       <FirebaseAuthProvider {...firebaseConfig} firebase={firebase}>
         <IonReactRouter>
           <IonRouterOutlet>
-            <Route path="/home" render={() => <Home uid={uid} />} exact={true} />
+            <Route path="/home" component={Home} exact={true} />
             <Route path="/message/:id" component={ViewMessage} exact={true} />
             <Route exact path="/" render={() => <Redirect to="/home" />} />
           </IonRouterOutlet>
