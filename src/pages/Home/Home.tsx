@@ -22,11 +22,7 @@ import { Message, getMessages } from '../../data/messages';
 
 import './Home.css';
 
-interface HomeProps {
-  uid: string
-}
-
-const Home: React.FC<HomeProps> = ({uid}) => {
+const Home: React.FC = () => {
 
   const [messages, setMessages] = useState<Message[]>([]);
 
