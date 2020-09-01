@@ -28,14 +28,20 @@ const NewNote: React.FC = () => {
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
 
-  const create = (e: React.FormEvent<HTMLFormElement>) => {
+  const create = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    db.push({
-      uid: user?.uid,
+    if (!user) {
+      return;
+    }
+
+    await db.push({
+      uid: user.uid,
       title: title || 'Untitled',
       content
-    }, history.goBack);
+    });
+
+    history.goBack();
   };
 
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import {
   IonBackButton,
+  IonButton,
   IonButtons,
   IonContent,
   IonHeader,
@@ -11,7 +12,7 @@ import {
 } from '@ionic/react';
 import { useObjectVal } from 'react-firebase-hooks/database';
 
-import firebase from 'firebase';
+import firebase from '../../lib/firebase';
 import { Note } from '../../lib/types';
 
 import './ViewNote.css';
@@ -29,6 +30,11 @@ const ViewNote: React.FC<ViewNoteProps> = ({ match }) => {
         <IonToolbar>
           <IonButtons>
             <IonBackButton text="Notes" defaultHref="/home" />
+          </IonButtons>
+          <IonButtons slot="primary">
+            <IonButton routerLink={`/notes/edit/${match.params.id}`}>
+              Edit
+            </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>

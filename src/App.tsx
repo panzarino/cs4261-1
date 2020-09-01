@@ -6,6 +6,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home/Home';
 import ViewNote from './pages/ViewNote/ViewNote';
 import NewNote from './pages/NewNote/NewNote';
+import EditNote from './pages/EditNote/EditNote';
 
 import firebase from './lib/firebase';
 
@@ -37,9 +38,10 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path="/home" component={Home} exact={true} />
-          <Route path="/notes/:id" component={ViewNote} exact={true} />
-          <Route path="/notes/new" component={NewNote} exact />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/notes/:id" component={ViewNote} />
+          <Route exact path="/notes/new" component={NewNote} />
+          <Route exact path="/notes/edit/:id" component={EditNote} />
           <Route exact path="/" render={() => <Redirect to="/home" />} />
         </IonRouterOutlet>
       </IonReactRouter>
