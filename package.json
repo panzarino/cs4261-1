@@ -49,8 +49,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.0",
-    "@ionic/cli": "^6.11.7",
-    "ios-sim": "^9.0.0"
+    "@ionic/cli": "^6.11.7"
   },
   "description": "An Ionic project"
 }
