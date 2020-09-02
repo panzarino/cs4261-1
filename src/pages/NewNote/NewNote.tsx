@@ -51,7 +51,6 @@ const NewNote: React.FC = () => {
           <IonButtons>
             <IonBackButton text="Notes" defaultHref="/home" />
           </IonButtons>
-          <IonTitle>New Note</IonTitle>
         </IonToolbar>
       </IonHeader>
 

@@ -9,12 +9,13 @@ import {
   IonLoading,
   IonPage,
   IonToolbar,
+  IonIcon,
 } from '@ionic/react';
 import { useObjectVal } from 'react-firebase-hooks/database';
 
 import firebase from '../../lib/firebase';
 import { Note } from '../../lib/types';
-
+import { createOutline } from 'ionicons/icons';
 import './ViewNote.css';
 
 const db = firebase.database()
@@ -32,8 +33,8 @@ const ViewNote: React.FC<ViewNoteProps> = ({ match }) => {
             <IonBackButton text="Notes" defaultHref="/home" />
           </IonButtons>
           <IonButtons slot="primary">
-            <IonButton routerLink={`/notes/edit/${match.params.id}`}>
-              Edit
+            <IonButton color="primary" routerLink={`/notes/edit/${match.params.id}`}>
+              <IonIcon size="large" icon={createOutline}/>
             </IonButton>
           </IonButtons>
         </IonToolbar>

@@ -60,7 +60,6 @@ const EditNote: React.FC<EditNoteProps> = ({ match }) => {
           <IonButtons>
             <IonBackButton text={ note ? note.title : 'Note' } defaultHref={`/notes/${match.params.id}`} />
           </IonButtons>
-          <IonTitle>Edit Note</IonTitle>
         </IonToolbar>
       </IonHeader>
 
